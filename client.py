@@ -27,10 +27,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket:
     Mess = (' sip:' + NAME + '@' + IP + ':' + str(PORT) + ' SIP/2.0')
     my_socket.send(bytes(METHOD + Mess, 'utf-8') + b'\r\n')
     data = my_socket.recv(1024)
+    Ser_Mess = data.decode('utf-8').split('\r\n')
+    print(Ser_Mess)
 
     if METHOD == "INVITE":
-    	my_socket.send(bytes('ACK' + Mess, 'utf-8') + b'\r\n')
-    	
+    	my_socket.send(bytes('ACK' + Mess, 'utf-8') + b'\r\n')    	
     
     print(data.decode('utf-8'))
     print("Terminando socket...")
