@@ -11,7 +11,7 @@ import socketserver
 try:
     IP = sys.argv[1]
     PORT = int(sys.argv[2])
-    #FILE = sys.argv[3]
+    AUDIO_FILE = sys.argv[3]
 except IndexError:
     sys.exit("python3 server.py IP port audio_file")
 
@@ -33,19 +33,24 @@ class EchoHandler(socketserver.DatagramRequestHandler):
             print(METHOD + ' recieved from: ' + NAME)
 
             if METHOD in METHODS:
-
                 if METHOD == 'INVITE':
                     self.wfile.write(b'SIP/2.0 100 Trying\r\n')
                     self.wfile.write(b'SIP/2.0 180 Ringing\r\n')
                     self.wfile.write(b'SIP/2.0 200 OK\r\n\r\n')
+
                 if METHOD == 'ACK':
-                    print('ACK')
+                    Exe = './mp32rtp -i 127.0.0.1 -p 23032 < ' + AUDIO_FILE
+                    print("Vamos a ejecutar", Exe)
+                    os.system(Exe)
+
                 if METHOD == 'BYE':
                     self.wfile.write(b'SIP/2.0 200 OK\r\n\r\n')
 
-            else:
-                self.wfile.write(b'SIP/2.0 Bad Request\r\n\r\n')
+                else:
+                    self.wfile.write(b'SIP/2.0 400 Bad Request\r\n\r\n')
 
+            else:
+                    self.wfile.write(b'SIP/2.0 405 Method Not Allowed\r\n\r\n')
         
 
 if __name__ == "__main__":

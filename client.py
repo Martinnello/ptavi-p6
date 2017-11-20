@@ -30,6 +30,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket:
 
     if METHOD == "INVITE":
     	my_socket.send(bytes('ACK' + Mess, 'utf-8') + b'\r\n')
+    	
     
     print(data.decode('utf-8'))
     print("Terminando socket...")
