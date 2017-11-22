@@ -8,7 +8,7 @@ import socket
 
 
 try:
-   
+
     METHOD = str.upper(sys.argv[1])
     CLIENT = sys.argv[2]
 
@@ -30,8 +30,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket:
     Reply = data.decode('utf-8').split()
 
     if Reply[1] == "100" and Reply[4] == "180" and Reply[7] == "200":
-    	my_socket.send(bytes('ACK' + Mess, 'utf-8') + b'\r\n')   	
-    
+        my_socket.send(bytes('ACK' + Mess, 'utf-8') + b'\r\n')
+
     print(data.decode('utf-8'))
     print("Terminando socket...")
 
