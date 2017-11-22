@@ -37,7 +37,7 @@ class EchoHandler(socketserver.DatagramRequestHandler):
                 self.wfile.write(Trying + Ringing + OK)
             elif METHOD == 'ACK':
                 Exe = './mp32rtp -i 127.0.0.1 -p 23032 < ' + AUDIO_FILE
-                print("Vamos a ejecutar", Exe)
+                print("Ejecutando...   ", Exe)
                 os.system(Exe)
             elif METHOD == 'BYE':
                 self.wfile.write(OK)
