@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-""" Servidor de eco en UDP simple. """
+"""Servidor de eco en UDP simple."""
 
 import os
 import sys
 import socketserver
 
 
-""" Message types. """
+"""Message types."""
 
 METHODS = ['INVITE', 'ACK', 'BYE']
 Trying = b'SIP/2.0 100 Trying\r\n'
@@ -19,8 +19,10 @@ Method_Not_Allowed = b'SIP/2.0 405 Method Not Allowed\r\n\r\n'
 
 
 class EchoHandler(socketserver.DatagramRequestHandler):
+    """Client handler requests."""
 
     def handle(self):
+        """Recieve INVITE, ACK, BYE & Sent 100, 180, 200, 400 and 405."""
         while 1:
             Lines = self.rfile.read()
             if len(Lines) == 0:
@@ -43,6 +45,7 @@ class EchoHandler(socketserver.DatagramRequestHandler):
                 self.wfile.write(Method_Not_Allowed)
             else:
                 self.wfile.write(Bad_Request)
+
 
 if __name__ == "__main__":
 
