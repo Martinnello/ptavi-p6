@@ -61,6 +61,5 @@ if __name__ == "__main__":
 
     except IndexError:
         sys.exit(" Usage: python3 server.py IP port audio_file")
-
     except KeyboardInterrupt:
         print("\n" + "Servidor finalizado")
